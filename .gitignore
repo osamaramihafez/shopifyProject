@@ -1,0 +1,4 @@
+*node_modules
+secretKey.json
+**/pgdata
+output.txt
