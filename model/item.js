@@ -61,7 +61,7 @@ async function getItemById(data) {
     return invalid;
   }
   let sql = "SELECT * FROM Item WHERE item_id=$1";
-  var params = [data.inventory_id];
+  var params = [data.item_id];
   return await utils.retrieve(
     sql,
     params,
@@ -84,7 +84,7 @@ async function updateItem(data) {
     return invalid;
   }
   let sql =
-    "UPDATE Item SET item_title=$2, item_description=$3, item_quantity=$4, WHERE item_id=$1";
+    "UPDATE Item SET item_title=$2, item_description=$3, item_quantity=$4 WHERE item_id=$1";
   var params = [
     data.item_id,
     data.item_title,

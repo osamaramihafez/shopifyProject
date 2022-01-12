@@ -22,7 +22,7 @@ const utils = require("./utils");
  *
  */
 router.get("/items", async (request, response) => {
-  await item.getInventory(request.body).then(async function (result) {
+  await item.getInventory().then(async function (result) {
     return utils.simpleResponse(result, response);
   });
 });
@@ -58,7 +58,7 @@ router.get("/item/:item_id", async (request, response) => {
 
 /*
  * @api [post] /item
- *  summary: "Create a item"
+ *  summary: "Create an item"
  *  tags:
  *    - Item Endpoints
  *  produces:
@@ -82,7 +82,7 @@ router.post("/item", async (request, response) => {
 
 /*
  * @api [patch] /item
- *  summary: "Update a item"
+ *  summary: "Update an item"
  *  tags:
  *    - Item Endpoints
  *  produces:
@@ -97,7 +97,7 @@ router.post("/item", async (request, response) => {
  *    200:
  *      description: item has been updated.
  *    404:
- *      description: Could not find a item with that id.
+ *      description: Could not find an item with that id.
  *
  */
 router.patch("/item", async (request, response) => {
