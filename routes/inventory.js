@@ -16,7 +16,7 @@ const utils = require("./utils");
  *      schema:
  *        type: array
  *        items:
- *          $ref: '#/definitions/item'
+ *          $ref: '#/definitions/Item'
  *    404:
  *      description: No item items found.
  *
@@ -45,7 +45,7 @@ router.get("/items", async (request, response) => {
  *    200:
  *      description: A list of item items.
  *      schema:
- *          $ref: '#/definitions/item'
+ *          $ref: '#/definitions/Item'
  *    404:
  *      description: No item items found with that ID.
  *
@@ -68,7 +68,7 @@ router.get("/item/:item_id", async (request, response) => {
  *          name: id
  *          description: the item to update and it's new attributes
  *          schema:
- *            $ref: '#/definitions/item'
+ *            $ref: '#/definitions/Item'
  *  responses:
  *    200:
  *      description: item has been created.
@@ -92,7 +92,7 @@ router.post("/item", async (request, response) => {
  *          name: id
  *          description: the item to update and it's new attributes
  *          schema:
- *            $ref: '#/definitions/item'
+ *            $ref: '#/definitions/Item'
  *  responses:
  *    200:
  *      description: item has been updated.
@@ -102,6 +102,32 @@ router.post("/item", async (request, response) => {
  */
 router.patch("/item", async (request, response) => {
   await item.updateItem(request.body).then(async function (result) {
+    return utils.simpleResponse(result, response);
+  });
+});
+
+/*
+ * @api [patch] /item
+ *  summary: "Update an item"
+ *  tags:
+ *    - Item Endpoints
+ *  produces:
+ *    - application/json
+ *  parameters:
+ *        - in: body
+ *          name: id
+ *          description: the item to update and it's new attributes
+ *          schema:
+ *            $ref: '#/definitions/Item'
+ *  responses:
+ *    200:
+ *      description: item has been updated.
+ *    404:
+ *      description: Could not find an item with that id.
+ *
+ */
+router.delete("/item", async (request, response) => {
+  await item.deleteItem(request.body).then(async function (result) {
     return utils.simpleResponse(result, response);
   });
 });

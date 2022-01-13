@@ -2,10 +2,10 @@
     "swagger": "2.0",
     "info": {
         "x-logo": {
-            "altText": "Quran Journey",
-            "url": "./assets/img/qjLogo.png"
+            "altText": "Shopify logistics",
+            "url": "http://cdn.onlinewebfonts.com/svg/img_372429.png"
         },
-        "title": "Quran Journey API"
+        "title": "Shopify Logistics API"
     },
     "host": "localhost",
     "basePath": "/api",
