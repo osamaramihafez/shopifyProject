@@ -4,7 +4,8 @@
   "description": "logistics company app",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "test-ci": "sh run_tests.sh"
   },
   "repository": {
     "type": "git",
