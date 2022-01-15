@@ -101,32 +101,30 @@ async function updateItem(data) {
   );
 }
 
-// /** Update an item's quantity.
-//  * Note: we just take in the quantity because the increase can be done elsewhere (i.e. frontend)*/
-// async function updateQuantity(data) {
-//   var invalid = utils.simpleValidation(data, {
-//     item_id: "integer",
-//     item_quantity: "integer",
-//   });
-//   if (invalid) {
-//     return invalid;
-//   }
-//   let sql = "UPDATE Item SET quantity=$2 WHERE item_id=$1";
-//   var params = [data.item_id, data.item_quantity];
-//   return await utils.update(
-//     sql,
-//     params,
-//     new utils.Message({
-//       success: `Successfully update item with id ${data.item_id}.`,
-//       none: `Could not find a item with id ${data.item_id}.`,
-//     })
-//   );
-// }
+/** Delete an item by id. */
+async function deleteItem(data) {
+  var invalid = utils.simpleValidation(data, {
+    item_id: "integer",
+  });
+  if (invalid) {
+    return invalid;
+  }
+  let sql = "DELETE FROM item WHERE item_id=$1 RETURNING *;";
+  var params = [data.item_id];
+  return await utils.remove(
+    sql,
+    params,
+    new utils.Message({
+      success: `Successfully deleted item with id ${data.item_id}.`,
+      none: `Could not find a item with id ${data.item_id}.`,
+    })
+  );
+}
 
 module.exports = {
   getInventory: getInventory,
   getItemById: getItemById,
   createItem: createItem,
   updateItem: updateItem,
-  // updateQuantity: updateQuantity, // Seems redundant
+  deleteItem: deleteItem,
 };

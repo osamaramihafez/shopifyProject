@@ -107,27 +107,29 @@ router.patch("/item", async (request, response) => {
 });
 
 /*
- * @api [patch] /item
- *  summary: "Update an item"
+ * @api [delete] /lesson
+ *  summary: "Delete a lesson"
  *  tags:
- *    - Item Endpoints
+ *    - Lessons
  *  produces:
  *    - application/json
  *  parameters:
  *        - in: body
  *          name: id
- *          description: the item to update and it's new attributes
+ *          description: the lesson to be deleted
  *          schema:
- *            $ref: '#/definitions/Item'
+ *              $ref: '#/definitions/Lesson'
  *  responses:
  *    200:
- *      description: item has been updated.
+ *      description: This lesson has been deleted.
+ *      schema:
+ *          $ref: '#/definitions/Lesson'
  *    404:
- *      description: Could not find an item with that id.
+ *      description: Could not find a lesson with that id.
  *
  */
-router.delete("/item", async (request, response) => {
-  await item.deleteItem(request.body).then(async function (result) {
+router.delete("/item/:item_id", async (request, response) => {
+  await item.deleteItem(request.params).then(async function (result) {
     return utils.simpleResponse(result, response);
   });
 });

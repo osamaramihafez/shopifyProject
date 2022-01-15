@@ -2,6 +2,7 @@ const utils = require("./utils");
 const apiGET = utils.apiGET;
 const apiPOST = utils.apiPOST;
 const apiPATCH = utils.apiPATCH;
+const apiDELETE = utils.apiDELETE;
 const setup = require("./setup");
 const seedData = setup.seedData;
 
@@ -60,6 +61,18 @@ function itemTests() {
     checkMatch(new_item, resp2.data.data[0]);
     expect(resp2.data.success).toEqual(true);
   });
+  
+  it("delete a item", async () => {
+    let resp = await apiGET(`/item/4`);
+    let resp1 = await apiDELETE(`/item/4`);
+    // We want to ensure that the deleted lesson is the correct lesson.
+    expect(resp1.data.data[0]).toEqual(resp.data.data[0]);
+    expect(resp1.data.success).toEqual(true);
+
+    let resp2 = await apiGET(`/item/4`);
+    expect(resp2.data.ecode).toEqual(3); // Ecode 3 implies None found (i.e. DNE)
+    expect(resp2.data.success).toEqual(false);
+});
 }
 
 function checkMatch(item_a, item_b) {
