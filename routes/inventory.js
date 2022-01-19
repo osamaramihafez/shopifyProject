@@ -3,34 +3,50 @@ const item = require("../model/item");
 const utils = require("./utils");
 
 /*
- * @api [get] /item
- *  summary: "Fetch all item items"
- *  description: "This is a general fetch and has no parameters. It will fetch all of the item items in the database."
+ * @api [get] /items
+ *  summary: "Filter items"
+ *  description: "This fetch acts as a filter based on the given query params. If none are given, then all params are fetched. Operator must be one of: eq, gt, lt, gte, or lte."
  *  tags:
  *    - Item Endpoints
  *  produces:
  *    - application/json
+ *  parameters:
+ *      - in: query
+ *        name: property
+ *        type: string
+ *        required: false
+ *        example: 'sale_date'
+ *      - in: query
+ *        name: operator
+ *        type: string
+ *        required: false
+ *        example: 'eq'
+ *      - in: query
+ *        name: value
+ *        type: string
+ *        required: false
+ *        example: '2021-5-28'
  *  responses:
  *    200:
- *      description: A list of item items.
+ *      description: A list of items.
  *      schema:
  *        type: array
  *        items:
  *          $ref: '#/definitions/Item'
  *    404:
- *      description: No item items found.
+ *      description: No items found.
  *
  */
 router.get("/items", async (request, response) => {
-  await item.getInventory().then(async function (result) {
+  await item.filterItems(request.query).then(async function (result) {
     return utils.simpleResponse(result, response);
   });
 });
 
 /*
  * @api [get] /item/{item}
- *  summary: "Fetch an item item by ID"
- *  description: "This fetches an item item by id."
+ *  summary: "Fetch an item by ID"
+ *  description: "This fetches an item by id."
  *  tags:
  *    - Item Endpoints
  *  produces:
@@ -43,11 +59,11 @@ router.get("/items", async (request, response) => {
  *        example: 1
  *  responses:
  *    200:
- *      description: A list of item items.
+ *      description: A list of items.
  *      schema:
  *          $ref: '#/definitions/Item'
  *    404:
- *      description: No item items found with that ID.
+ *      description: No items found with that ID.
  *
  */
 router.get("/item/:item_id", async (request, response) => {
@@ -107,25 +123,25 @@ router.patch("/item", async (request, response) => {
 });
 
 /*
- * @api [delete] /lesson
- *  summary: "Delete a lesson"
+ * @api [delete] /item
+ *  summary: "Delete an item"
  *  tags:
- *    - Lessons
+ *    - Item Endpoints
  *  produces:
  *    - application/json
  *  parameters:
  *        - in: body
  *          name: id
- *          description: the lesson to be deleted
+ *          description: the item to be deleted
  *          schema:
- *              $ref: '#/definitions/Lesson'
+ *              $ref: '#/definitions/item'
  *  responses:
  *    200:
- *      description: This lesson has been deleted.
+ *      description: This item has been deleted.
  *      schema:
- *          $ref: '#/definitions/Lesson'
+ *          $ref: '#/definitions/item'
  *    404:
- *      description: Could not find a lesson with that id.
+ *      description: Could not find a item with that id.
  *
  */
 router.delete("/item/:item_id", async (request, response) => {
@@ -134,4 +150,33 @@ router.delete("/item/:item_id", async (request, response) => {
   });
 });
 
+// The extra feature that I will be implementing: Filtering based on fields/inventory count/tags/other metadata
+/*
+ * @api [get] /item/filter/{option}
+ *  summary: "Filter items"
+ *  description: "This fetches an item based on a filter option."
+ *  tags:
+ *    - Item Endpoints
+ *  produces:
+ *    - application/json
+ *  parameters:
+ *      - in: path
+ *        name: item_id
+ *        type: integer
+ *        required: true
+ *        example: 1
+ *  responses:
+ *    200:
+ *      description: A list of items.
+ *      schema:
+ *          $ref: '#/definitions/Item'
+ *    404:
+ *      description: No items found with that ID.
+ *
+ */
+router.get("/item/filter/:option", async (request, response) => {
+  await item.deleteItem(request.params).then(async function (result) {
+    return utils.simpleResponse(result, response);
+  });
+});
 module.exports = router;

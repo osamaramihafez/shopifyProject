@@ -38,6 +38,17 @@ function itemTests() {
     expect(resp1.data.success).toEqual(true);
   });
 
+  // it("getting a lesson by it's date", async () => {
+  //   let lessonA = seedData.lesson[0];
+
+  //   const resp1 = await apiGET(
+  //     `/lessons?property=lesson_date&operator=eq&value=${lessonA.lesson_date}`
+  //   );
+  //   let lessonB = resp1.data.data[0];
+  //   checkMatch(lessonA, lessonB);
+  //   expect(resp1.data.success).toEqual(true);
+  // });
+
   it("updating a item", async () => {
     let new_item = {
       item_id: 1,
@@ -61,7 +72,7 @@ function itemTests() {
     checkMatch(new_item, resp2.data.data[0]);
     expect(resp2.data.success).toEqual(true);
   });
-  
+
   it("delete a item", async () => {
     let resp = await apiGET(`/item/4`);
     let resp1 = await apiDELETE(`/item/4`);
@@ -72,7 +83,7 @@ function itemTests() {
     let resp2 = await apiGET(`/item/4`);
     expect(resp2.data.ecode).toEqual(3); // Ecode 3 implies None found (i.e. DNE)
     expect(resp2.data.success).toEqual(false);
-});
+  });
 }
 
 function checkMatch(item_a, item_b) {
