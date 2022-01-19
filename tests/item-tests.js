@@ -38,16 +38,16 @@ function itemTests() {
     expect(resp1.data.success).toEqual(true);
   });
 
-  // it("getting a lesson by it's date", async () => {
-  //   let lessonA = seedData.lesson[0];
+  it("getting a item by it's date", async () => {
+    let itemA = seedData.item[0];
 
-  //   const resp1 = await apiGET(
-  //     `/lessons?property=lesson_date&operator=eq&value=${lessonA.lesson_date}`
-  //   );
-  //   let lessonB = resp1.data.data[0];
-  //   checkMatch(lessonA, lessonB);
-  //   expect(resp1.data.success).toEqual(true);
-  // });
+    const resp1 = await apiGET(
+      `/items?property=sale_date&operator=eq&value=${itemA.sale_date}`
+    );
+    let itemB = resp1.data.data[0];
+    checkMatch(itemA, itemB);
+    expect(resp1.data.success).toEqual(true);
+  });
 
   it("updating a item", async () => {
     let new_item = {
@@ -76,7 +76,7 @@ function itemTests() {
   it("delete a item", async () => {
     let resp = await apiGET(`/item/4`);
     let resp1 = await apiDELETE(`/item/4`);
-    // We want to ensure that the deleted lesson is the correct lesson.
+    // We want to ensure that the deleted item is the correct item.
     expect(resp1.data.data[0]).toEqual(resp.data.data[0]);
     expect(resp1.data.success).toEqual(true);
 

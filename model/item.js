@@ -1,8 +1,10 @@
 const utils = require("./utils");
 
-// Note: this object contains key value pairs of the attribute and types within the schema.
+// Note: this object contains key value pairs of the attributes and types within the schema.
 const attributes = {
   item_id: "integer",
+  item_description: "string",
+  item_quantity: "integer",
   sale_date: "date",
   tag: "string",
 };

@@ -1,6 +1,8 @@
+const moment = require("moment");
+
 /**
  * In this seeded database there is:
- * - 2 lessons
+ * - 2 Items
  */
 const seedData = {
   item: [
@@ -9,12 +11,16 @@ const seedData = {
       item_title: "amazing title #1",
       item_description: "things are descriptions because why not.",
       item_quantity: 53,
+      sale_date: new moment(new Date("2021-5-28")).format("YYYY-MM-DD"),
+      item_tag: "Shoes",
     },
     {
       item_id: 2,
       item_title: "amazing title #2",
       item_description: "Do they want me to be adding tests? Who knows?",
       item_quantity: 51,
+      sale_date: new moment(new Date("2022-5-28")).format("YYYY-MM-DD"),
+      item_tag: "Shoes",
     },
   ],
 };
