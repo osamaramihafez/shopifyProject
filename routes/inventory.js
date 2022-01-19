@@ -2,6 +2,7 @@ const router = require("express").Router();
 const item = require("../model/item");
 const utils = require("./utils");
 
+// The extra feature that I will be implementing: Filtering based on fields/inventory count/tags/other metadata
 /*
  * @api [get] /items
  *  summary: "Filter items"
@@ -134,12 +135,12 @@ router.patch("/item", async (request, response) => {
  *          name: id
  *          description: the item to be deleted
  *          schema:
- *              $ref: '#/definitions/item'
+ *              $ref: '#/definitions/Item'
  *  responses:
  *    200:
  *      description: This item has been deleted.
  *      schema:
- *          $ref: '#/definitions/item'
+ *          $ref: '#/definitions/Item'
  *    404:
  *      description: Could not find a item with that id.
  *
@@ -150,33 +151,4 @@ router.delete("/item/:item_id", async (request, response) => {
   });
 });
 
-// The extra feature that I will be implementing: Filtering based on fields/inventory count/tags/other metadata
-/*
- * @api [get] /item/filter/{option}
- *  summary: "Filter items"
- *  description: "This fetches an item based on a filter option."
- *  tags:
- *    - Item Endpoints
- *  produces:
- *    - application/json
- *  parameters:
- *      - in: path
- *        name: item_id
- *        type: integer
- *        required: true
- *        example: 1
- *  responses:
- *    200:
- *      description: A list of items.
- *      schema:
- *          $ref: '#/definitions/Item'
- *    404:
- *      description: No items found with that ID.
- *
- */
-router.get("/item/filter/:option", async (request, response) => {
-  await item.deleteItem(request.params).then(async function (result) {
-    return utils.simpleResponse(result, response);
-  });
-});
 module.exports = router;
