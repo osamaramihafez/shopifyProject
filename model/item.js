@@ -50,13 +50,21 @@ async function createItem(data) {
     item_title: "string",
     item_description: "string",
     item_quantity: "integer",
+    sale_date: "string",
+    item_tag: "string",
   });
   if (invalid) {
     return invalid;
   }
   var sql =
-    "INSERT INTO Item (item_title, item_description, item_quantity) VALUES ($1, $2, $3) RETURNING *;";
-  var params = [data.item_title, data.item_description, data.item_quantity];
+    "INSERT INTO Item (item_title, item_description, item_quantity, sale_date, item_tag) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
+  var params = [
+    data.item_title,
+    data.item_description,
+    data.item_quantity,
+    data.sale_date,
+    data.item_tag,
+  ];
   return await utils.create(
     sql,
     params,
@@ -144,18 +152,22 @@ async function updateItem(data) {
     item_title: "string",
     item_description: "string",
     item_quantity: "integer",
+    sale_date: "string",
+    item_tag: "string",
   });
 
   if (invalid) {
     return invalid;
   }
   let sql =
-    "UPDATE Item SET item_title=$2, item_description=$3, item_quantity=$4 WHERE item_id=$1";
+    "UPDATE Item SET item_title=$2, item_description=$3, item_quantity=$4, sale_date=$5, tag=$6 WHERE item_id=$1";
   var params = [
     data.item_id,
     data.item_title,
     data.item_description,
     data.item_quantity,
+    data.sale_date,
+    data.item_tag,
   ];
   return await utils.update(
     sql,

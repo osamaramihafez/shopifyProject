@@ -37,31 +37,37 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div class="container">
       <h1>Logistics store</h1>
+
       <h3>The create operation requires all attributes as input</h3>
       <label>item_title</label><input id="item_title" type="text" /><br />
       <label>item_description</label
       ><input id="item_description" type="text" /><br />
       <label>item_quantity</label><input id="item_quantity" type="text" /><br />
-      <label>sale_date</label><input id="sale_date" type="text" /><br />
+      <label>sale_date</label
+      ><input id="sale_date" type="date" placeholder="mm/dd/yyyy" /><br />
       <label>item_tag</label><input id="item_tag" type="text" /><br />
       <button onclick="create()">Create</button>
       <br /><br />
       <br /><br />
-      <h3>These operations that require an ID as input</h3>
+
+      <h3>These are operations that require an ID as input</h3>
       <p>
         For every successful creation, please assume the item id increases by 1
       </p>
-      <label>item_title</label><input id="item_id" type="text" /><br />
-      <button>Retreive</button>
-      <button>Update</button>
-      <button>Delete</button>
+      <p>
+        Also note that update requires that you fill in all of the above fields.
+      </p>
+      <label>item_id</label><input id="item_id" type="text" /><br />
+      <button onclick="retrieve()">Retreive</button>
+      <button onclick="update()">Update</button>
+      <button onclick="remove()">Delete</button>
       <br /><br />
       <br /><br />
       <h3>Filtering requires the following inputs:</h3>
       <label>property</label><input id="property" type="text" /><br />
       <label>operator</label><input id="operator" type="text" /><br />
       <label>value</label><input id="value" type="text" /><br />
-      <button>Filter</button>
+      <button onclick="filter()">Filter</button>
 
       <div>
         <h3>Result of request:</h3>

@@ -8,6 +8,8 @@ $(document).ready(function () {
 });
 
 function create() {
+  $("#items").empty();
+  $("#items").hide();
   $.ajax({
     url: `${API}/item`,
     data: {
@@ -43,12 +45,11 @@ function create() {
 }
 
 function retrieve() {
+  $("#items").empty();
+  $("#items").hide();
   $.ajax({
-    url: `${API}/item`,
-    data: {
-      item_id: 1,
-    },
-    type: "POST",
+    url: `${API}/item/${$("#item_id").val()}`,
+    type: "GET",
     dataType: "text json",
   })
     .done((data) => {
