@@ -11,6 +11,8 @@ You will need to have the following installed:
 - Node
 - Docker
 
+Obviously, you'll need to run `npm install` in the parent directory before executing any scripts.
+
 ## Running the project
 To run the entire project you can execute the following in your terminal: `sh run_everything.sh`
 
@@ -19,5 +21,5 @@ To run the entire project you can execute the following in your terminal: `sh ru
 You can run tests using `sh run_tests.sh`. Please note that tests are automatically run whenever you push to master or a Pull Request.
 
 ## Viewing documentaion
-
 You can view the docs by executing `sh run.sh` from inside the `docs` folder and then navigating to `localhost` on your browser.
+Note: you may need to have npx installed, but it's likely to work without doing so if you already have npm (node).
