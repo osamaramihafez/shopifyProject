@@ -71,9 +71,70 @@ function retrieve() {
     });
 }
 
-function update() {}
+function update() {
+  $("#items").empty();
+  $("#items").hide();
+  $.ajax({
+    url: `${API}/item/`,
+    body: {
+      item_id: $("#item_id").val(),
+      item_title: $("#item_title").val(),
+      item_description: $("#item_description").val(),
+      item_quantity: $("#item_quantity").val(),
+      sale_date: new Date($("#sale_date").val())
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " "),
+      item_tag: $("#item_tag").val(),
+    },
+    type: "PATCH",
+    dataType: "text json",
+  })
+    .done((data) => {
+      console.log(data);
+      console.log(data.error);
+      $("#success").html(data.success);
+      if (data.success == true) {
+        $("#alert").slideDown();
+        displayItems([data.data[0]]);
+      } else {
+        $("#alert").html(data.error);
+        $("#alert").slideDown();
+      }
+    })
+    .catch((error) => {
+      console.log(error.responseJSON.error);
+      $("#alert").html(error.responseJSON.error);
+      $("#alert").slideDown();
+    });
+}
 
-function remove() {}
+function remove() {
+  $("#items").empty();
+  $("#items").hide();
+  $.ajax({
+    url: `${API}/item/${$("#item_id").val()}`,
+    type: "DELETE",
+    dataType: "text json",
+  })
+    .done((data) => {
+      console.log(data);
+      console.log(data.error);
+      $("#success").html(data.success);
+      if (data.success == true) {
+        $("#alert").slideDown();
+        displayItems([data.data[0]]);
+      } else {
+        $("#alert").html(data.error);
+        $("#alert").slideDown();
+      }
+    })
+    .catch((error) => {
+      console.log(error.responseJSON.error);
+      $("#alert").html(error.responseJSON.error);
+      $("#alert").slideDown();
+    });
+}
 
 function filter() {}
 
