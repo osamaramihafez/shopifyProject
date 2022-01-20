@@ -160,7 +160,7 @@ async function updateItem(data) {
     return invalid;
   }
   let sql =
-    "UPDATE Item SET item_title=$2, item_description=$3, item_quantity=$4, sale_date=$5, tag=$6 WHERE item_id=$1";
+    "UPDATE Item SET item_title=$2, item_description=$3, item_quantity=$4, sale_date=$5, item_tag=$6 WHERE item_id=$1";
   var params = [
     data.item_id,
     data.item_title,

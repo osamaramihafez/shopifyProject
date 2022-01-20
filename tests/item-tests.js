@@ -3,6 +3,7 @@ const apiGET = utils.apiGET;
 const apiPOST = utils.apiPOST;
 const apiPATCH = utils.apiPATCH;
 const apiDELETE = utils.apiDELETE;
+const moment = require("moment");
 const setup = require("./setup");
 const seedData = setup.seedData;
 
@@ -30,6 +31,8 @@ function itemTests() {
       item_title: "amazing title #x",
       item_description: "this is a thing you can place in your humble abode",
       item_quantity: 49,
+      sale_date: new moment(new Date("2021-5-28")).format("YYYY-MM-DD"),
+      item_tag: "Boots",
     };
 
     let resp1 = await apiPOST(`/item`, new_item);
@@ -55,6 +58,8 @@ function itemTests() {
       item_title: "different title",
       item_description: "we want a different desc",
       item_quantity: 49,
+      sale_date: new moment(new Date("2021-5-28")).format("YYYY-MM-DD"),
+      item_tag: "Boots",
     };
 
     let resp1 = await apiGET(`/item/1`);
