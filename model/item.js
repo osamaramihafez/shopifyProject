@@ -132,7 +132,7 @@ async function getItemById(data) {
     sql,
     params,
     new utils.Message({
-      success: `Successfully fetched an inventory item with id ${data.inventory_id}.`,
+      success: `Successfully fetched an inventory item with id ${data.item_id}.`,
     })
   );
 }

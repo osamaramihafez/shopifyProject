@@ -4,8 +4,6 @@
     <title>LOGISTICS CORP.</title>
 
     <!-- Favicons -->
-    <link href="assets/img/logos/M.ico" rel="icon" />
-    <!-- <link href="img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- Google Fonts -->
     <link
@@ -30,14 +28,49 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
+
+    <!-- My css -->
+    <link href="assets/css/extra.css" rel="stylesheet" />
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <h1>
-      This is a title
-    </h1>
+    <div class="container">
+      <h1>Logistics store</h1>
+      <h3>The create operation requires all attributes as input</h3>
+      <label>item_title</label><input id="item_title" type="text" /><br />
+      <label>item_description</label
+      ><input id="item_description" type="text" /><br />
+      <label>item_quantity</label><input id="item_quantity" type="text" /><br />
+      <label>sale_date</label><input id="sale_date" type="text" /><br />
+      <label>item_tag</label><input id="item_tag" type="text" /><br />
+      <button onclick="create()">Create</button>
+      <br /><br />
+      <br /><br />
+      <h3>These operations that require an ID as input</h3>
+      <p>
+        For every successful creation, please assume the item id increases by 1
+      </p>
+      <label>item_title</label><input id="item_id" type="text" /><br />
+      <button>Retreive</button>
+      <button>Update</button>
+      <button>Delete</button>
+      <br /><br />
+      <br /><br />
+      <h3>Filtering requires the following inputs:</h3>
+      <label>property</label><input id="property" type="text" /><br />
+      <label>operator</label><input id="operator" type="text" /><br />
+      <label>value</label><input id="value" type="text" /><br />
+      <button>Filter</button>
 
+      <div>
+        <h3>Result of request:</h3>
+        <label>Successful: </label>
+        <p id="success"></p>
+        <p id="alert"></p>
+      </div>
+      <div id="items"></div>
+    </div>
     <!-- Vendor JS Files -->
     <script src="assets/vendor/jquery/jquery.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -50,5 +83,8 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+
+    <!-- My js -->
+    <script src="assets/js/logistics.js"></script>
   </body>
 </html>

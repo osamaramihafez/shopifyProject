@@ -345,6 +345,7 @@ module.exports = {
   create: create,
   remove: remove,
   setResult: setResult,
+  returnInvalid: returnInvalid,
   getOperator: getOperator,
   simpleValidation: checkBody,
   errorEnum: errorEnum,
